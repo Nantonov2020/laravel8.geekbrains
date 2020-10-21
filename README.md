@@ -1,2 +1,2 @@
-# laravel8.geekbrains
+# Выполнение домашних заданий по курсу "Laravel" в GeekBrains
  
