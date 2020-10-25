@@ -1,0 +1,13 @@
+header{
+    height: 200px;
+    background-color: beige;
+}
+
+footer{
+    height: 50px;
+     background-color: beige;
+}
+container{
+    margin: 0 auto;
+   
+}
