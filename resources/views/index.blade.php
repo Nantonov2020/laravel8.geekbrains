@@ -1,19 +1,11 @@
-<?php
-include resource_path(). ('/views/header.php');
-
-?>
+@extends('layouts.main')
 
 
-<?php
-include resource_path(). ('/views/menu.php');
-
-?>
-
-Главная страница сайта.
+@section('content')
+    Главная страница сайта.
+@stop
 
 
-<?php
-include resource_path(). ('/views/footer.php');
 
-?>
+
 

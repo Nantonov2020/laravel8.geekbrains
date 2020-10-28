@@ -1,13 +1,9 @@
-<?php
-include resource_path(). ('/views/header.php');
+@extends('layouts.main')
 
-?>
+@section('content')
 
-Административная панель
+    Административная панель
 
+@stop
 
-<?php
-include resource_path(). ('/views/footer.php');
-
-?>
 

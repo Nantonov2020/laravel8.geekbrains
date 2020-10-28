@@ -1,19 +1,37 @@
-<?php
-include resource_path(). ('/views/header.php');
+@extends('layouts.main')
 
-?>
+@section('content')
 
-
-<?php
-include resource_path(). ('/views/menu.php');
-?>
-
-<h1>{{ $news['title'] }}</h1>
-
-<p> {{ $news['text'] }} </p>
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
 
 
-<?php
-include resource_path(). ('/views/footer.php');
+                <div class="post-preview">
 
-?>
+                        <h2 class="post-title">
+                            {{ $news['title'] }}
+                        </h2>
+                        <p class="post-subtitle">
+                            {{ $news['text'] }}
+                        </p>
+
+                    <p class="post-meta">Опубликовано:
+                        <a href="#">А.В. Иванов</a>
+                        {{ \Carbon\Carbon::now()  }}</p>
+                </div>
+                <hr>
+
+        <!-- Pager -->
+            <div class="clearfix">
+                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+
+
+@stop
+
+
+
+

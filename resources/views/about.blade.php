@@ -1,16 +1,8 @@
-<?php
-include resource_path(). ('/views/header.php');
+@extends('layouts.main')
 
-?>
-
-<?php
-include resource_path(). ('/views/menu.php');
-?>
+    @section('content')
+        О нас.
+    @stop
 
 
-О нас.
 
-<?php
-include resource_path(). ('/views/footer.php');
-
-?>

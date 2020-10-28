@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    private static $categories = [
+    private $categories = [
         [
             'id' => 1,
             'title' => 'Спорт',
@@ -39,7 +39,7 @@ class Controller extends BaseController
         ]
     ];
 
-    private static $news = [
+    private $news = [
         [
             'id' => 1,
             'title' => 'Победа "Спартака" в урюпинской бойне',
@@ -139,12 +139,12 @@ class Controller extends BaseController
 
     ];
 
-    public static function getNewsCategories(){
-        return self::$categories;
+    public function getNewsCategories(){
+        return $this->categories;
         }
 
-    public static function getNews(){
-        return self::$news;
+    public function getNews(){
+        return $this->news;
     }
 
 }
