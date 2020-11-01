@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,10 @@ Route::get('/news', [CategoryController::class, 'index'])->name('news');
 Route::get('/category/{slug}', [CategoryController::class, 'category'])->name('category')->where('slug', '[A-Za-z]+');
 
 Route::get('/news/{id}', [NewsController::class, 'showNews'])->where('id', '[0-9]+')->name('detail');
+
+Route::resource('/contacts',ReviewsController::class);
+
+Route::resource('/orders',OrdersController::class);
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
