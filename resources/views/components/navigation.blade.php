@@ -16,6 +16,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('news') }}">Категории</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('contacts.create') }}">Контакты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('orders.create') }}">Заказ</a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">Личный кабинет</a>
