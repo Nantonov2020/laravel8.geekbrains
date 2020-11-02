@@ -24,7 +24,7 @@ class ReviewsController extends Controller
      */
     public function create()
     {
-        return view('contacts.create');
+        return view('contacts');
     }
 
     /**
@@ -54,7 +54,7 @@ class ReviewsController extends Controller
         };
         $saveFile($data);
 
-        return redirect()->route('contacts.create')->with('success', 'Ваше сообщение успешно отправлено.');
+        return redirect()->route('contacts')->with('success', 'Ваше сообщение успешно отправлено.');
     }
 
     /**
