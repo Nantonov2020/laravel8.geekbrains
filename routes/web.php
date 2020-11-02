@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\ContactsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,10 @@ Route::get('/category/{slug}', [CategoryController::class, 'category'])->name('c
 
 Route::get('/news/{id}', [NewsController::class, 'showNews'])->where('id', '[0-9]+')->name('detail');
 
-Route::resource('/contacts',ReviewsController::class);
+Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts');
+
+
+Route::resource('/reviews',ReviewsController::class);
 
 Route::resource('/orders',OrdersController::class);
 
