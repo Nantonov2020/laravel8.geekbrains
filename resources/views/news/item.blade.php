@@ -9,15 +9,15 @@
                 <div class="post-preview">
 
                         <h2 class="post-title">
-                            {{ $news['title'] }}
+                            {{ $news->title }}
                         </h2>
                         <p class="post-subtitle">
-                            {{ $news['text'] }}
+                            {{ $news->text }}
                         </p>
 
                     <p class="post-meta">Опубликовано:
-                        <a href="#">А.В. Иванов</a>
-                        {{ \Carbon\Carbon::now()  }}</p>
+                        <a href="#">{{ $news->author }}</a>
+                        {{ $news->created_at }}</p>
                 </div>
                 <hr>
 

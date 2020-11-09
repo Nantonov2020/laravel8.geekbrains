@@ -24,7 +24,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 
 Route::get('/news', [CategoryController::class, 'index'])->name('news');
-Route::get('/category/{slug}', [CategoryController::class, 'category'])->name('category')->where('slug', '[A-Za-z]+');
+Route::get('/category/{slug}', [CategoryController::class, 'category'])->name('category')->where('slug', '[A-Za-z-]+');
 
 Route::get('/news/{id}', [NewsController::class, 'showNews'])->where('id', '[0-9]+')->name('detail');
 

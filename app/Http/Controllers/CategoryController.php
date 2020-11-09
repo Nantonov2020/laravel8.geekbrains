@@ -2,16 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index(){
-        $categories = $this->getNewsCategories();
+
+        $objCategories = new Category();
+        $categories = $objCategories->getAllCategory();
+        //dd($categories);
+        //$categories = $this->getNewsCategories();
         return view('categories.index',['categories' => $categories]);
     }
 
     public function category($slug){
+        $objCategories = new Category();
+
+        $news = $objCategories->getAllNewsBySlugOfCategory($slug);
+        $nameCategory = '';
+        $val = $objCategories->getNameCategoryBySlug($slug);
+        if ($val) {
+            $nameCategory = $val[0];
+        }
+        //dd($nameCategory);
+       /*
         $categories = $this->getNewsCategories();
         $idCategory = 0;
         $nameCategory = '';
@@ -28,6 +43,11 @@ class CategoryController extends Controller
                 $news[] = $item;
             }
         }
+
+       */
+
         return view('categories.category',['news' => $news, 'name' => $nameCategory]);
+
+
     }
 }
