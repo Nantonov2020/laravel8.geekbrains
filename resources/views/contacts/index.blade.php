@@ -16,6 +16,14 @@
                 <div class="col-sm-8">
                     <div class="contact-form">
                         <h2 class="title text-center">Обратная связь</h2>
+
+                        @if (session('success'))
+                            <div style="color:red">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+
                         <div class="status alert alert-success" style="display: none"></div>
                         <form id="main-contact-form" class="contact-form row" name="contact-form" method="post" action="{{ route('reviews.store') }}">
                             @csrf

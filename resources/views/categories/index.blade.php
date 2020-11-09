@@ -7,10 +7,10 @@
             @forelse($categories as $item)
 
             <div class="post-preview">
-                <a href="{{ route('category',['slug' => $item['slug']]) }}">
+                <a href="{{ route('category',['slug' => $item->slug]) }}">
 
                     <h2 class="post-title">
-                        {{ $item['title'] }}
+                        {{ $item->title }}
                     </h2>
                 </a>
             </div>

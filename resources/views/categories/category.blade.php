@@ -1,25 +1,27 @@
 @extends('layouts.main')
 
 @section('content')
-    <h4>Новости из категории: {{ $name }}</h4>
+    <h4>Новости из категории: {{ $name->title }}</h4>
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
 
             @forelse($news as $item)
 
                 <div class="post-preview">
-                    <a href="{{ route('detail',['id' => $item['id']]) }}">
+                    <a href="{{ route('detail',['id' => $item->id]) }}">
 
                         <h2 class="post-title">
-                            {{ $item['title'] }}
+                            {{$item->title}}
                         </h2>
                         <h3 class="post-subtitle">
+                            {{$item->description}}
+                            <br>
                             Подробнее >>
                         </h3>
                     </a>
                     <p class="post-meta">Опубликовано:
-                        <a href="#">А.В. Иванов</a>
-                        {{ \Carbon\Carbon::now()  }}</p>
+                        <a href="#">{{$item->author}}</a>
+                        {{$item->created_at}}</p>
                 </div>
                 <hr>
             @empty

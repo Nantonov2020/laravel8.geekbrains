@@ -3,6 +3,13 @@
 @section('content')
     <h1>Оформление заказа</h1>
 
+
+    @if (session('success'))
+        <div style="color:red">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('orders.store') }}">
         @csrf
         <div class="form-group col-md-6">
