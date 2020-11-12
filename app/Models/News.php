@@ -10,9 +10,6 @@ class News extends Model
     use HasFactory;
 
     protected $table = 'news';
+    protected $primaryKey = "id";
 
-    public function getNewByID($id)
-    {
-        return \DB::table($this->table)->find($id);
-    }
 }

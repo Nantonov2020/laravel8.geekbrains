@@ -10,17 +10,14 @@ class Category extends Model
     use HasFactory;
 
     protected $table = 'categories';
+    protected $primaryKey = "id";
+    public $timestamps = false;
 
-    public function getAllCategory()
+    public function news()
     {
-        //return \DB::select("SELECT * FROM {$this->table}");
+        return $this->hasMany(News::class, 'category_id','id');
 
-        return \DB::table($this->table)->get();
-    }
-
-    public function getAllNewsBySlugOfCategory($slug)
-    {
-        return \DB::table($this->table)->join('news', 'categories.id', '=', 'news.category_id')->where('slug','=',$slug)->get();
+        //return \DB::table($this->table)->join('news', 'categories.id', '=', 'news.category_id')->where('slug','=',$slug)->get();
     }
 
     public function getNameCategoryBySlug($slug){
