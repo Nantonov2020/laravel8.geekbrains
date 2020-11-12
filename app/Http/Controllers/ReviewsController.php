@@ -36,23 +36,15 @@ class ReviewsController extends Controller
     public function store(Request $request)
     {
         $data = $request->only(['name','email','message','subject']);
-        $saveFile = function(array $data) {
-            $responseData = [];
-            $fileNews = storage_path('app/reviews.txt');
-            if(file_exists($fileNews)) {
-                $file = file_get_contents($fileNews);
-                $response = json_decode($file, true);
-            }
 
-            $responseData[] = $data;
-            if(isset($response) && !empty($response)) {
-                $r = array_merge($response, $responseData);
-            }else {
-                $r = $responseData;
-            }
-            file_put_contents($fileNews, json_encode($r));
-        };
-        $saveFile($data);
+        $objReview = new Reviews();
+
+        $objReview->name = $data['name'];
+        $objReview->email = $data['email'];
+        $objReview->text = $data['message'];
+        $objReview->subject = $data['subject'];
+
+        $objReview->save();
 
         return redirect()->route('contacts')->with('success', 'Ваше сообщение успешно отправлено.');
     }

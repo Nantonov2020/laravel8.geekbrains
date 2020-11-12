@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Orders;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-class OrdersController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +25,7 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        return view('orders.create');
+        return view('categories.create');
     }
 
     /**
@@ -35,27 +36,24 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only(['name','email','message','phone']);
+        $data = $request->only(['title']);
+        $objOrder = new Category();
 
-        $objOrder = new Orders();
-
-        $objOrder->name = $data['name'];
-        $objOrder->email = $data['email'];
-        $objOrder->text = $data['message'];
-        $objOrder->phone = $data['phone'];
+        $objOrder->title = $data['title'];
+        $objOrder->slug = Str::slug($data['title']);
 
         $objOrder->save();
 
-        return redirect()->route('orders.create')->with('success', 'Ваш заказ принят.');
+        return redirect()->route('admin')->with('success', 'Категория добавлена.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Orders $orders)
+    public function show($id)
     {
         //
     }
@@ -63,10 +61,10 @@ class OrdersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Orders $orders)
+    public function edit($id)
     {
         //
     }
@@ -75,21 +73,29 @@ class OrdersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Orders $orders)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->only(['title']);
+
+        $category = Category::find($id);
+        $category->title = $data['title'];
+        $category->slug = Str::slug($data['title']);
+
+        $category->save();
+
+        return redirect()->route('admin')->with('success', 'Категория скорректирована.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Orders $orders)
+    public function destroy($id)
     {
         //
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Orders;
 use Illuminate\Http\Request;
+use App\Models\News;
 
-class OrdersController extends Controller
+class NewsResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        return view('orders.create');
+        //
     }
 
     /**
@@ -35,27 +35,29 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only(['name','email','message','phone']);
+        $data = $request->only(['title','text','description','author','category_id']);
 
-        $objOrder = new Orders();
+        $news = new News();
 
-        $objOrder->name = $data['name'];
-        $objOrder->email = $data['email'];
-        $objOrder->text = $data['message'];
-        $objOrder->phone = $data['phone'];
+        $news->title = $data['title'];
+        $news->text = $data['text'];
+        $news->description = $data['description'];
+        $news->author = $data['author'];
+        $news->category_id = $data['category_id'];
 
-        $objOrder->save();
+        $news->save();
 
-        return redirect()->route('orders.create')->with('success', 'Ваш заказ принят.');
+        return redirect()->route('showallnews')->with('success', 'Новость добавлена.');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Orders $orders)
+    public function show($id)
     {
         //
     }
@@ -63,10 +65,10 @@ class OrdersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Orders $orders)
+    public function edit($id)
     {
         //
     }
@@ -75,21 +77,31 @@ class OrdersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Orders $orders)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->only(['title','text','description','author']);
+
+        $news = News::find($id);
+        $news->title = $data['title'];
+        $news->text = $data['text'];
+        $news->description = $data['description'];
+        $news->author = $data['author'];
+
+        $news->save();
+
+        return redirect()->route('showallnews')->with('success', 'Новость скорректирована.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Orders  $orders
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Orders $orders)
+    public function destroy($id)
     {
         //
     }
