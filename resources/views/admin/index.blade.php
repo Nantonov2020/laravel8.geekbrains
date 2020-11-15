@@ -1,6 +1,9 @@
-@extends('layouts.main')
+@extends('layouts.admin')
 
 @section('content')
+
+
+
     <h1>Список категорий</h1>
     <hr>
     <div style="color:red">
@@ -11,10 +14,15 @@
 
         <div class="post-preview">
                 <div class="post-title">
-                    {{ $item->title }}
+                    <h2>{{ $item->title }}</h2>
                     <br>
                     <a href="{{ route('correctcategory',['id'=>$item->id]) }}">Редактировать</a>
-                    <a href="#">Удалить</a>
+                    <form method="POST" action="{{ route('categories.destroy',$item->id)}}">
+                        @method("DELETE")
+                        @csrf
+                        <button type="submit" name="submit" class="btn btn-danger">Удалить</button>
+
+                    </form>
                 </div>
         </div>
         <hr>
@@ -27,6 +35,13 @@
         @csrf
         <div class="form-group col-md-6">
             <input type="text" name="title" class="form-control" required="required" placeholder="Наименование категории">
+            @error('title')
+            <div class="alert alert-danger">
+                @foreach($errors->get('title') as $error)
+                    {{ $error }}
+                @endforeach
+            </div>
+            @enderror
         </div>
         <div class="form-group col-md-12">
             <input type="submit" name="submit" class="btn btn-primary pull-right" value="Добавить">

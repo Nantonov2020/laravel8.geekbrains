@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrdersStore;
 use App\Models\Orders;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class OrdersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrdersStore $request)
     {
         $data = $request->only(['name','email','message','phone']);
 

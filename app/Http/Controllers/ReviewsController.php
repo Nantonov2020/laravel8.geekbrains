@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReviewsStore;
 use App\Models\Reviews;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class ReviewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReviewsStore $request)
     {
         $data = $request->only(['name','email','message','subject']);
 
