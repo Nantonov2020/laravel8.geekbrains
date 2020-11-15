@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoriesStore;
+use App\Http\Requests\CategoriesUpdate;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,7 +17,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        //dd('555');
     }
 
     /**
@@ -34,7 +36,7 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesStore $request)
     {
         $data = $request->only(['title']);
         $objOrder = new Category();
@@ -76,7 +78,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoriesUpdate $request, $id)
     {
         $data = $request->only(['title']);
 
@@ -97,6 +99,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return redirect()->route('admin')->with('success', 'Категория удалена.');
     }
 }

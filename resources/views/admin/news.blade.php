@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.admin')
 
 @section('content')
     <h4>Новости</h4>
@@ -22,7 +22,12 @@
                         {{$item->created_at}}</p>
 
                     <a href="{{route('correctnews',['id'=>$item->id])}}">Редактировать</a>
-                    <a href="#">Удалить</a>
+                    <form method="POST" action="{{ route('newsresource.destroy',$item->id)}}">
+                        @method("DELETE")
+                        @csrf
+                        <button type="submit" name="submit" class="btn btn-danger">Удалить</button>
+
+                    </form>
                 </div>
                 <hr>
             @empty

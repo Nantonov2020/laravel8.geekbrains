@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewsResourceStore;
+use App\Http\Requests\NewsResourceUpdate;
 use Illuminate\Http\Request;
 use App\Models\News;
 
@@ -33,7 +35,7 @@ class NewsResourceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NewsResourceStore $request)
     {
         $data = $request->only(['title','text','description','author','category_id']);
 
@@ -80,7 +82,7 @@ class NewsResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(NewsResourceUpdate $request, $id)
     {
         $data = $request->only(['title','text','description','author']);
 
@@ -103,6 +105,8 @@ class NewsResourceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = News::find($id);
+        $category->delete();
+        return redirect()->route('showallnews')->with('success', 'Новость удалена.');
     }
 }
