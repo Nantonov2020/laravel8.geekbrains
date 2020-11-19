@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\News;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -26,6 +27,21 @@ class AdminController extends Controller
 
     public function addNews(){
         return view('admin.addnews',['categories' => Category::all()]);
+    }
+
+    public function users(){
+        return view('admin.users',['users' => User::orderBy('id', 'desc')->get()]);
+    }
+
+    public function makeStatusAdmin(Request $request){
+
+        $data = $request->only(['id','status']);
+        $id = $data['id'];
+        $data['status'] ? $status = 1 : $status = 0;
+        $user = User::find($id);
+        $user->is_admin = $status;
+        $user->save();
+        return view('admin.users',['users' => User::orderBy('id', 'desc')->get()]);
     }
 
 

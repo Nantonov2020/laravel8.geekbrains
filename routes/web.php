@@ -41,11 +41,21 @@ Route::resource('/categories',CategoriesController::class);
 
 Route::resource('/newsresource',NewsResourceController::class);
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-Route::get('/admin/correctcategory/{id}', [AdminController::class, 'correctcategory'])->name('correctcategory');
-Route::get('/admin/showallnews', [AdminController::class, 'showAllNews'])->name('showallnews');
-Route::get('/admin/correctnews/{id}', [AdminController::class, 'correctNews'])->name('correctnews');
-Route::get('/admin/addnews', [AdminController::class, 'addNews'])->name('addnews');
+
+Route::group(['middleware' => 'auth'],function(){
+
+    Route::group(['middleware' => 'admin'],function(){
+
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+        Route::get('/admin/correctcategory/{id}', [AdminController::class, 'correctcategory'])->name('correctcategory');
+        Route::get('/admin/showallnews', [AdminController::class, 'showAllNews'])->name('showallnews');
+        Route::get('/admin/correctnews/{id}', [AdminController::class, 'correctNews'])->name('correctnews');
+        Route::get('/admin/addnews', [AdminController::class, 'addNews'])->name('addnews');
+        Route::get('/admin/users', [AdminController::class, 'users'])->name('users');
+        Route::post('/admin/makeStatusAdmin', [AdminController::class, 'makeStatusAdmin'])->name('makeStatusAdmin');
+    });
+});
+
 
 Auth::routes();
 
