@@ -53,6 +53,8 @@ Route::group(['middleware' => 'auth'],function(){
         Route::get('/admin/addnews', [AdminController::class, 'addNews'])->name('addnews');
         Route::get('/admin/users', [AdminController::class, 'users'])->name('users');
         Route::post('/admin/makeStatusAdmin', [AdminController::class, 'makeStatusAdmin'])->name('makeStatusAdmin');
+        Route::get('/admin/parser', [\App\Http\Controllers\ParserController::class,'index'])->name('parser');
+        Route::get('/admin/parser/{name}/{service}', [\App\Http\Controllers\ParserController::class,'parseYandex'])->where('name', '[a-z]+')->where('service', '[a-z]+')->name('parser.news');
     });
 });
 
